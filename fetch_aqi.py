@@ -26,17 +26,18 @@ def fetch_aqi_grid():
     print(f"Time: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 60)
     
-    # Generate global grid at 2° spacing
-    # Latitude: -50 to 70 (skip extreme poles — no data/people)
+    # Generate global grid at 4° spacing
+    # ~2,700 points — fits within 10-min GitHub Actions timeout
+    # Latitude: -50 to 70 (skip extreme poles)
     # Longitude: -180 to 180
     points = []
-    for lat in range(-50, 72, 2):
-        for lng in range(-180, 182, 2):
+    for lat in range(-50, 72, 4):
+        for lng in range(-180, 182, 4):
             if lng > 180:
                 continue
             points.append({'lat': lat, 'lng': lng})
     
-    print(f"\nGrid: {len(points)} points at 2° spacing")
+    print(f"\nGrid: {len(points)} points at 4° spacing")
     
     # Fetch in batches of 50 (Open-Meteo limit per request)
     all_readings = []
@@ -106,9 +107,9 @@ def fetch_aqi_grid():
         except Exception as e:
             print(f"  Batch {batch_num} failed: {e}")
         
-        # Small delay to be polite
-        if batch_num % 10 == 0:
-            time.sleep(0.5)
+        # Small delay every 30 batches to avoid rate limiting
+        if batch_num % 30 == 0:
+            time.sleep(0.3)
     
     print(f"\nTotal readings: {len(all_readings)}")
     
@@ -131,7 +132,7 @@ def fetch_aqi_grid():
     
     output = {
         'updated': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        'resolution_deg': 2,
+        'resolution_deg': 4,
         'total_points': len(compact_grid),
         'stats': {
             'max_pm25': round(max_pm25, 1),
