@@ -1,11 +1,11 @@
 {
-  "updated": "2026-04-21T11:40:11Z",
-  "total_points": 2171,
+  "updated": "2026-04-21T12:50:58Z",
+  "total_points": 2450,
   "stats": {
-    "max_pm25": 133.6,
-    "avg_pm25": 8.9,
-    "unhealthy_points": 32,
-    "hazardous_points": 0
+    "max_pm25": 152.3,
+    "avg_pm25": 8.6,
+    "unhealthy_points": 44,
+    "hazardous_points": 1
   },
   "source": "Open-Meteo Air Quality API (air-quality-api.open-meteo.com)"
 }
