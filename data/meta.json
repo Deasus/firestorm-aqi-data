@@ -1,9 +1,9 @@
 {
-  "updated": "2026-10-07T13:38:12Z",
+  "updated": "2026-10-07T14:08:19Z",
   "total_points": 2221,
   "stats": {
-    "max_pm25": 368.8,
-    "avg_pm25": 10.3,
+    "max_pm25": 318.5,
+    "avg_pm25": 10.5,
     "unhealthy_points": 50,
     "hazardous_points": 2
   },
